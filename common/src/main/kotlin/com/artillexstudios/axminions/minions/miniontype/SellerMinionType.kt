@@ -8,7 +8,9 @@ import com.artillexstudios.axminions.minions.MinionTicker
 import com.artillexstudios.axminions.utils.Enchantments
 import kotlin.math.roundToInt
 import org.bukkit.Material
+import org.bukkit.block.Container
 import org.bukkit.inventory.DoubleChestInventory
+import org.bukkit.inventory.ItemStack
 
 class SellerMinionType : MinionType("seller", AxMinionsPlugin.INSTANCE.getResource("minions/seller.yml")!!) {
 
@@ -73,25 +75,47 @@ class SellerMinionType : MinionType("seller", AxMinionsPlugin.INSTANCE.getResour
                 continue
             }
 
-            var price = AxMinionsPlugin.integrations.getPricesIntegration()!!.getPrice(it)
-
-            if (price <= 0) {
-                if (getConfig().get("delete-unsellable")) {
-                    it.amount = 0
+            val itemMeta = it.itemMeta
+            if (itemMeta is org.bukkit.inventory.meta.BlockStateMeta) {
+                val blockState = itemMeta.blockState
+                if (blockState is Container) {
+                    val stacks = arrayOfNulls<ItemStack>(blockState.inventory.size)
+                    for ((counter, stack) in blockState.inventory.contents.withIndex()) {
+                        val success = sellItemStack(minion, stack)
+                        if (!success) {
+                            stacks[counter] = stack
+                        }
+                    }
+                    blockState.inventory.contents = stacks
+                    itemMeta.blockState = blockState
                 }
-                continue
             }
+            it.itemMeta = itemMeta
 
-            price *= getDouble("multiplier", minion.getLevel())
-
-            if (minion.getStorage() + price > getDouble("storage", minion.getLevel())) {
-                continue
+            val success = sellItemStack(minion, it)
+            if (success) {
+                it.amount = 0
             }
-
-            minion.setActions(minion.getActionAmount() + it.amount)
-            minion.damageTool()
-            minion.setStorage(minion.getStorage() + price)
-            it.amount = 0
         }
+    }
+
+    // Returns if the item should be removed
+    private fun sellItemStack(minion: Minion, it: ItemStack): Boolean {
+        var price = AxMinionsPlugin.integrations.getPricesIntegration()!!.getPrice(it)
+
+        if (price <= 0) {
+            return getConfig().get("delete-unsellable")
+        }
+
+        price *= getDouble("multiplier", minion.getLevel())
+
+        if (minion.getStorage() + price > getDouble("storage", minion.getLevel())) {
+            return false
+        }
+
+        minion.setActions(minion.getActionAmount() + it.amount)
+        minion.damageTool()
+        minion.setStorage(minion.getStorage() + price)
+        return true
     }
 }
