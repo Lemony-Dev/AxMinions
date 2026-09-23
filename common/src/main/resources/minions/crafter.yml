@@ -20,7 +20,8 @@ item:
     - " <#FFEE00>❙ <white>Crafted items: <#FFEEAA><actions>"
     - ""
     - "<#FFEE00><b>(!)</b> Place the minion and give it an item to craft!"
-
+warning:
+  no-tool: "Tool eksik"
 gui:
   upgrade:
     type: "gold_ingot"
