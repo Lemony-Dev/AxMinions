@@ -46,7 +46,8 @@ item:
     - " <#00AAFF>❙ <white>Blocks broken: <#FFEEAA><actions>"
     - ""
     - "<#00AAFF><b>(!)</b> Place the minion and give it a pickaxe!"
-
+warning:
+  no-tool: "Tool eksik"
 gui:
   upgrade:
     type: "gold_ingot"
