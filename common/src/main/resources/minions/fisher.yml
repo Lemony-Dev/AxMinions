@@ -20,7 +20,8 @@ item:
     - " <#00EEFF>❙ <white>Fish caught: <#FFEEAA><actions>"
     - ""
     - "<#00EEFF><b>(!)</b> Place the minion and give it a fishing rod!"
-
+warning:
+  no-tool: "Tool eksik"
 gui:
   upgrade:
     type: "gold_ingot"
