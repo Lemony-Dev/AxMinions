@@ -29,7 +29,8 @@ item:
     - " <#FF3333>❙ <white>Mobs killed: <#FFEEAA><actions>"
     - ""
     - "<#FF3333><b>(!)</b> Place the minion and give it a sword!"
-
+warning:
+  no-tool: "Tool eksik"
 gui:
   upgrade:
     type: "gold_ingot"
