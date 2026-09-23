@@ -25,7 +25,8 @@ item:
     - " <#FFEE00>❙ <white>Items collected: <#FFEEAA><actions>"
     - ""
     - "<#FFEE00><b>(!)</b> Place the minion and give it a shovel!"
-
+warning:
+  no-tool: "Tool eksik"
 gui:
   upgrade:
     type: "gold_ingot"
