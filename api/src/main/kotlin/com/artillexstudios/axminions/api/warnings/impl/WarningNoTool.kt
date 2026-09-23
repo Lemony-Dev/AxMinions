@@ -6,7 +6,7 @@ import com.artillexstudios.axminions.api.minions.Minion
 
 class WarningNoTool : Warning("no_tool") {
 
-    override fun getContent(minion Minion): String {
+    override fun getContent(minion: Minion): String {
         return Messages.NO_TOOL_WARNING()
     }
 }
