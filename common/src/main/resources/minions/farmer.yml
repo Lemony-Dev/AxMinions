@@ -31,7 +31,8 @@ item:
     - " <#33FF33>❙ <white>Crops harvested: <#AAFFAA><actions>"
     - ""
     - "<#33FF33><b>(!)</b> Place the minion and give it a hoe!"
-
+warning:
+  no-tool: "Tool eksik"
 gui:
   upgrade:
     type: "gold_ingot"
