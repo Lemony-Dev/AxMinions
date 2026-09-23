@@ -16,7 +16,7 @@ abstract class Warning(private val name: String) {
         return this.name
     }
 
-    abstract fun getContent(): String
+    abstract fun getContent(minion: Minion): String
 
     fun display(minion: Minion) {
         if (!Config.DISPLAY_WARNINGS()) return
@@ -30,7 +30,7 @@ abstract class Warning(private val name: String) {
                 textDisplayMeta.alignment(TextDisplayMeta.Alignment.CENTER);
                 textDisplayMeta.billboardConstrain(DisplayMeta.BillboardConstrain.CENTER);
             }
-            page.content = StringUtils.formatToString(this.getContent());
+            page.content = StringUtils.formatToString(this.getContent(minion));
             page.spawn();
             minion.setWarning(this)
             minion.setWarningHologram(hologram)
