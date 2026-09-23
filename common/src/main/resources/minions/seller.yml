@@ -23,7 +23,8 @@ item:
     - " <#CC00FF>❙ <white>Items sold: <#FFEEAA><actions>"
     - ""
     - "<#CC00FF><b>(!)</b> Place the minion and give it a bow!"
-
+warning:
+  no-tool: "Tool eksik"
 gui:
   upgrade:
     type: "gold_ingot"
