@@ -9,5 +9,6 @@ class WarningNoTool : Warning("no_tool") {
     override fun getContent(minion: Minion): String {
         val minionType = minion.getType()
         val config = minionType.getConfig()
+        return Messages.NO_TOOL_WARNING()
     }
 }
